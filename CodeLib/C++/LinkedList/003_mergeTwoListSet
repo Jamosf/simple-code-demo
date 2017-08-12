@@ -1,0 +1,59 @@
+/*
+ * 两个链表P和Q，现在需要求的集合P和集合Q的并集
+ * 函数名称为setAdd
+ */
+
+//先判断某个数是否在链表中
+void ismember(int a,node *head){
+	int sign = 0;
+	node *p = head;
+	if(p == null){
+		return sign;
+	}
+	while(p != null){
+		if(p->data == a){
+			sign = 1;
+			break;
+		}
+		p = p->next;
+	}
+	return sign;
+}
+
+node *setAdd(node *P,node *Q){
+	node *temp,*tail,*point1,*point2;			//tail用来记录P链表的尾指针,以便在尾指针的基础上增加数据
+	if(P == null){
+		return Q;
+	}
+	if(Q == null){
+		return P;
+	}
+	temp = P;
+	while(temp != null){
+		tail = temp;
+		temp = temp->next;
+	}
+	temp = Q;
+	while(ismember(temp->data,p)){				//找出第一个不在p中的元素，并以此为头
+		temp = temp->next;
+	}
+	point1 = temp;								//现在temp相当于新的Q， 因为在操作中涉及删除多个数据，因此需要两个指针。
+	point2 = temp->next;						//只用一个指针是无法完成这一工作的
+	while(point2 != null){
+		if(ismember(point2->data,p)){
+			point1->next = point2->next;
+		}else{
+			point1 = point2;
+		}
+		point2 = point2->next;
+	}
+	tail->next = temp;
+	return P;
+}
+
+
+
+
+
+
+
