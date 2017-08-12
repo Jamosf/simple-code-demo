@@ -1,0 +1,1 @@
+CHANGED,/Users/fengshangren/AndroidStudioProjects/Douban3/app1/build/intermediates/transforms/instantRun/debug/folders/1/5/main/com/kay/douban/ListRefreshFragment$1.class

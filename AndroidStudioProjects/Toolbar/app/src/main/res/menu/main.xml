@@ -1,0 +1,34 @@
+<menu xmlns:android = "http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/lis"
+        android:title="yigeren">
+        
+            <item
+                android:id="@+id/crea"
+                android:title="新建文件">
+
+            <item
+                android:title="dakai"
+                android:id="@+id/open">
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </item>
+
+
+
+
+
+
+
+</menu>

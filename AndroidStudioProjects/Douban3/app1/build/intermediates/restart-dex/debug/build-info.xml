@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<instant-run
+    abi="armeabi-v7a,armeabi"
+    api-level="19"
+    density="xhdpi"
+    format="7"
+    timestamp="175554315662049"
+    token="-7616206855917695789"
+    verifier="COMPATIBLE" >
+
+    <task
+        name="javac"
+        duration="395" />
+    <task
+        name="instant-run-dex"
+        duration="899" />
+    <task
+        name="instant-run-transform"
+        duration="9" />
+    <task
+        name="verifier"
+        duration="3" />
+
+    <artifact
+        location="/Users/fengshangren/AndroidStudioProjects/Douban3/app1/build/intermediates/reload-dex/debug/classes.dex"
+        type="RELOAD_DEX" />
+
+    <build timestamp="175495107863623" >
+        <artifact
+            location="/Users/fengshangren/AndroidStudioProjects/Douban3/app1/build/outputs/apk/app1-debug.apk"
+            type="MAIN" />
+    </build>
+    <build
+        timestamp="175554315662049"
+        verifier="COMPATIBLE" >
+        <artifact
+            location="/Users/fengshangren/AndroidStudioProjects/Douban3/app1/build/intermediates/reload-dex/debug/classes.dex"
+            type="RELOAD_DEX" />
+    </build>
+
+</instant-run>

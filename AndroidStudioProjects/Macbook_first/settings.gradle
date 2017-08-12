@@ -1,0 +1,2 @@
+include ':app', ':broadcast', ':activitylifecycletest', ':broadcastreceiver', ':database', ':filestorage', ':Firstactivity', ':listviewtest', ':contactstest', ':content-provider', ':notificationtest', ':smsreceive', ':carmertest', ':webapp', ':locationapp', ':sensorapp'
+project(':broadcast').projectDir = new File('broadcast2')

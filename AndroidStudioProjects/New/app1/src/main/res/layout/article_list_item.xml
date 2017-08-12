@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="20dp"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingTop="20dp">
+
+    <TextView
+        android:id="@+id/date_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:textColor="@color/text_second_day"
+        android:textSize="@dimen/list_date_size" />
+
+    <TextView
+        android:id="@+id/title_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/date_item"
+        android:layout_marginTop="5dp"
+        android:textColor="@color/text_primary_day"
+        android:textSize="@dimen/list_title_size" />
+
+    <TextView
+        android:id="@+id/text_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/title_item"
+        android:lineSpacingMultiplier="1.1"
+        android:textColor="@color/text_second_day"
+        android:textSize="@dimen/list_text_size" />
+
+
+</RelativeLayout>

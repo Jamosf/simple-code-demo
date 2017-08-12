@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="GradleSettings">
+    <option name="linkedExternalProjectsSettings">
+      <GradleProjectSettings>
+        <option name="distributionType" value="LOCAL" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="gradleHome" value="$APPLICATION_HOME_DIR$/gradle/gradle-2.10" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/Firstactivity" />
+            <option value="$PROJECT_DIR$/activitylifecycletest" />
+            <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/broadcast2" />
+            <option value="$PROJECT_DIR$/broadcastreceiver" />
+            <option value="$PROJECT_DIR$/carmertest" />
+            <option value="$PROJECT_DIR$/contactstest" />
+            <option value="$PROJECT_DIR$/content-provider" />
+            <option value="$PROJECT_DIR$/database" />
+            <option value="$PROJECT_DIR$/filestorage" />
+            <option value="$PROJECT_DIR$/listviewtest" />
+            <option value="$PROJECT_DIR$/locationapp" />
+            <option value="$PROJECT_DIR$/notificationtest" />
+            <option value="$PROJECT_DIR$/sensorapp" />
+            <option value="$PROJECT_DIR$/smsreceive" />
+            <option value="$PROJECT_DIR$/webapp" />
+          </set>
+        </option>
+        <option name="myModules">
+          <set>
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/Firstactivity" />
+            <option value="$PROJECT_DIR$/activitylifecycletest" />
+            <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/broadcast2" />
+            <option value="$PROJECT_DIR$/broadcastreceiver" />
+            <option value="$PROJECT_DIR$/carmertest" />
+            <option value="$PROJECT_DIR$/contactstest" />
+            <option value="$PROJECT_DIR$/content-provider" />
+            <option value="$PROJECT_DIR$/database" />
+            <option value="$PROJECT_DIR$/filestorage" />
+            <option value="$PROJECT_DIR$/listviewtest" />
+            <option value="$PROJECT_DIR$/locationapp" />
+            <option value="$PROJECT_DIR$/notificationtest" />
+            <option value="$PROJECT_DIR$/sensorapp" />
+            <option value="$PROJECT_DIR$/smsreceive" />
+            <option value="$PROJECT_DIR$/webapp" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+    </option>
+  </component>
+</project>
