@@ -24,7 +24,7 @@ ITEM_PIPELINES = {
     'scrapy.pipelines.images.ImagesPipeline': 1
 }
 #将ＩＭＡＧＥＳ＿ＳＴＯＲＥ设置为一个有效的文件夹，用来存储下载的图片．否则管道将保持禁用状态，即使你在ＩＴＥＭ＿ＰＩＰＥＬＩＮＥＳ设置中添加了它．
-IMAGES_STORE = '/Users/Jamos/Pictures/scrapied'
+IMAGES_STORE = '/home/jamos/Pictures/scrapied'
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'example (+http://www.yourdomain.com)'

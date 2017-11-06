@@ -1,44 +1,4 @@
 # -*- coding: utf-8 -*-
-# import scrapy
-# from scrapy.linkextractors import LinkExtractor
-# from scrapy.spiders import CrawlSpider, Rule
-# from example.items import ExampleItem
-# import urlparse
-# import urllib
-
-
-# class CountrySpider(CrawlSpider):
-#     name = 'country'
-#     start_urls = ['http://1024.c2048ao.pw/pw/htm_data/15/1708/730626.html']
-#
-#     def parse(self,response):
-#         cate = response.xpath('//div[@class="tpc_content"]')
-#         link_list = cate.xpath('./a/@href').extract()
-#         for url in link_list:
-#             yield{
-#                 # "test" : url
-#                 scrapy.Request(url ,callback=self.download_image)
-#             }
-#         # yield {
-#         #   "test" : cate.xpath('./a/@href').extract_first()
-#         # }
-#
-#
-#             # print base_url
-#             # yield{
-#             #    scrapy.Request(base_url,callback=self.download_image)
-#             # }
-#
-#     def download_image(self,response):
-#         url_content = urlparse.urlparse(response.url)
-#         url_query = url_content.query
-#         attr_file = url_query.split("&")[0].split("=")
-#         file_name = urllib.unquote(attr_file[1])
-#         download_path = "pic/" + file_name
-#         with open(download_path, "wb") as wf:
-#             wf.write(response.body)
-
-# -*- coding: utf-8 -*-
 import scrapy
 from scrapy import Request
 import re
@@ -46,8 +6,8 @@ from crazy.items import ImageItem
 from scrapy.contrib.loader import ItemLoader
 import urlparse
 
-class XiaohuaSpider(scrapy.Spider):
-    name = "baidumeinv"
+class FirstSpider(scrapy.Spider):
+    name = "first"
     allowed_domains = ["1024.c2048ao.pw/"]
     start_urls = ['http://1024.c2048ao.pw/pw/thread.php?fid=16']
     download_delay = 2
@@ -67,14 +27,9 @@ class XiaohuaSpider(scrapy.Spider):
             # request.meta['*'] = item
             # return request
 
-
-
     def download_image(self,response):
         item = ImageItem()
         srcs = response.xpath('//div[@class="tpc_content"]/a/img/@src').extract()
         item['image_urls'] = srcs
         yield item
         # yield {"test" : srcs}
-
-
-

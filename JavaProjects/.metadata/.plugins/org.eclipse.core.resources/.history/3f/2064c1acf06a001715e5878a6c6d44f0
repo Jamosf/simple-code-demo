@@ -1,9 +1,0 @@
-package regex;
-
-public class study {
-
-	public static void main(String[] args){
-		// 简单的正则表达式
-		System.out.println("abc".matches("..."));
-	}
-}

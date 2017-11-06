@@ -1,8 +1,0 @@
-package regex;
-
-public class study {
-
-	public static void main(string[] args){
-		System.out.println("abc".matches("..."))
-	}
-}
