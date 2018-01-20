@@ -1,4 +1,13 @@
-func mysql_connection(){
+package main
+
+import (
+	"database/sql"
+	"fmt"
+
+	"github.com/astaxie/beego/logs"
+)
+
+func mysql_connection() {
 	db, err := sql.Open("mysql", "root:password123@tcp(192.168.59.103:3306)/mysql")
 	if err != nil {
 		logs.Error(err.Error())
@@ -20,4 +29,3 @@ func mysql_connection(){
 		}
 	}
 }
-
