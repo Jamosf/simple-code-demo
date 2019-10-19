@@ -1,0 +1,7 @@
+{
+    "python.pythonPath": "/Users/Jamos/.pyenv/shims/python",
+    "python.linting.pylintEnabled": false,
+    "python.linting.enabled": true,
+    "python.linting.banditEnabled": true,
+    "python.linting.flake8Enabled": false
+}
