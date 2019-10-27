@@ -78,7 +78,7 @@ class Trade:
 
     def get_real_data(self):
         while True:
-            soup = BeautifulSoup(self.driver.page_source,"lxml")
+            # soup = BeautifulSoup(self.driver.page_source,"lxml")
             print("%d：%s" % (int(round(time.time() * 1000)), self.driver.find_element_by_id("last_last").text))
             # candleStatus = soup.select("#highcharts-4 > svg > g.highcharts-series-group > g.highcharts-series.highcharts-tracker > path:nth-child(69)")[0]["fill"]
             # if candleStatus == "#32ea32":
