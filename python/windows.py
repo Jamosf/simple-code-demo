@@ -1,7 +1,7 @@
 #####################说明#########################
 # 运行本脚本前置条件：
 # 1、安装python3, 设置python3的环境变量，安装selenium、browsermobproxy、bs4库
-# 2、下载chromedriver
+# 2、下载chromedriver, 并设置环境变量
 # 3、
 
 
@@ -54,6 +54,9 @@ class Trade:
         # self.driver = webdriver.Chrome(desired_capabilities=self.caps, options=self.option)
         self.driver = webdriver.Chrome(options=self.option)
 
+        # 保存k线数据的容器
+        self.histroy_data_m = []
+
     def get_history_data_from_chrome(self):
         try:
             self.driver.get("https://cn.investing.com/indices/hong-kong-40-futures-candlestick")
@@ -69,31 +72,29 @@ class Trade:
                     _content = _response["content"]["text"]
                     _candles = json.loads(_content)["candles"]
                     for _candle in _candles:
+                        self.histroy_data_m.append(_candle)
                         print(_candle)
+            self.histroy_data_m = self.histroy_data_m[39:]
             self.get_real_data()
         finally:
             self.server.stop()
             self.driver.close()
             self.driver.quit()
 
+    def get_last_data_time(self):
+        return self.histroy_data_m[-1][0]
+
     def get_real_data(self):
         while True:
-            # soup = BeautifulSoup(self.driver.page_source,"lxml")
-            print("%d：%s" % (int(round(time.time() * 1000)), self.driver.find_element_by_id("last_last").text))
-            # candleStatus = soup.select("#highcharts-4 > svg > g.highcharts-series-group > g.highcharts-series.highcharts-tracker > path:nth-child(69)")[0]["fill"]
-            # if candleStatus == "#32ea32":
-            #     print("上一根k线状态：跌")
-            # elif candleStatus == "#fe3232":
-            #     print("上一根k线状态：涨")
-            # else:
-            #     print("error")
-            # candleStatus = soup.select("#highcharts-4 > svg > g.highcharts-series-group > g.highcharts-series.highcharts-tracker > path:nth-child(70)")[0]["fill"]
-            # if candleStatus == "#32ea32":
-            #     print("k线状态：跌")
-            # elif candleStatus == "#fe3232":
-            #     print("k线状态：涨")
-            # else:
-            #     print("error")
+            now_data = int(self.driver.find_element_by_id("last_last").text)
+            now_time = int(round(time.time()))
+            last_time = self.get_last_data_time()
+            if(now_time - last_time/1000 == 60):
+                print("new k is formed")
+                self.histroy_data_m.append(now_data)
+                self.histroy_data_m = self.histroy_data_m[1:]
+            print("%d：%s" % (now_time, now_data))
+            
             time.sleep(1)
 
     def click_windows(self, x, y):
