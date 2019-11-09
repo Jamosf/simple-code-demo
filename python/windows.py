@@ -9,6 +9,13 @@ from PyQt5.QtGui import *
 from threading import Thread
 import pandas as pd
 import numpy as np
+import ConfigParser
+
+from selenium import webdriver
+from bs4 import BeautifulSoup
+from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
+from browsermobproxy import Server
+from selenium.webdriver.chrome.options import Options
 
 APP_ID = '10737093'
 API_KEY = 'VDlmSvGusP6LCMq9ct8YP8CZ'
@@ -33,14 +40,17 @@ class Grab_data:
     
     def parse_img(self, img, time):
         img.save(str(time) + '.png')
-        with open(str(time) + '.png', 'rb') as f:
-            img_content = f.read()
-            client = AipOcr(APP_ID, API_KEY, SCRET_KEY)
-            msg = client.basicGeneral(img_content)
-            for i in msg.get('words_result'):
-                if '最新' in i.get('words'):
-                    self.data_list.append([time, (i.get('words'))[-5:]])
-                    break
+        try:
+            with open(str(time) + '.png', 'rb') as f:
+                img_content = f.read()
+                client = AipOcr(APP_ID, API_KEY, SCRET_KEY)
+                msg = client.basicGeneral(img_content)
+                for i in msg.get('words_result'):
+                    if '最新' in i.get('words'):
+                        self.data_list.append([time, (i.get('words'))[-5:]])
+                        break
+                f.close()
+        finally:
             f.close()
             os.remove(str(time) + '.png')
         
@@ -146,8 +156,86 @@ class Q_trade:
         self.loss = 0
         self.buy_long_price = 0
         self.buy_short_price = 0
+        self.root = tk.Tk()
+
+        # proxy 脚本的位置
+        self.proxy_server_path = r'C:\Program Files\browsermob-proxy-2.1.4\bin\browsermob-proxy.bat'
+        # k线图
+        self.canle_url = 'https://cn.investing.com/indices/hong-kong-40-futures-candlestick'
+        
+        # get请求的url
+        self.req_url = 'https://cn.investing.com/common/modules/js_instrument_chart'
+        
+        # 启动proxy server
+        self.server = Server(self.proxy_server_path)
+        self.server.start()
+        self.proxys = self.server.create_proxy()
+        self.proxys.new_har("k线", options={'captureContent': True})
+        
+        self.option = Options()
+        self.option.add_argument("--headless")
+        self.option.add_argument("--proxy-server={0}".format(self.proxys.proxy))
         pass
-    
+
+    def get_history_data_from_chrome(self):
+        try:
+            self.driver.get(self.canle_url)
+            # 切换到分钟k线的界面
+            self.driver.find_element_by_css_selector(".fchart-switches-timeframes a").click()
+            # 等待5s时间来加载
+            time.sleep(5)
+            result = self.proxys.har
+            for entry in result["log"]["entries"]:
+                _url = entry["request"]["url"]
+                if self.req_url in _url:
+                    _response = entry["response"]
+                    _content = _response["content"]["text"]
+                    _candles = json.loads(_content)["candles"]
+                    for _candle in _candles:
+                        _candle = _candle[:4]
+                        self.histroy_data_m.append(_candle)
+                        # print(_candle)
+            self.histroy_data_m = self.histroy_data_m[39:]
+            print(self.histroy_data_m)
+            self.get_real_data()
+        finally:
+            self.server.stop()
+            self.driver.close()
+            self.driver.quit()    
+
+    def get_data_from_ini(self):
+        if os.path.exists('config.ini'):
+            config = ConfigParser.ConfigParser()
+            config.read('config.ini')
+            self.ma5 = config.get('maData', 'ma5')
+            self.ma10 = config.get('maData', 'ma10')
+            self.ma30 = config.get('maData', 'ma30')
+        else:
+            print('配置文件损坏，程序将运行30分钟后才能进行交易')
+
+    def get_ma_from_input(self, ma5_text, ma10_text, ma30_text):
+        self.ma5 = ma5_text
+        self.ma10 = ma10_text
+        self.ma30 = ma30_text
+        self.root.quit()
+
+    def start_main_tk(self):
+        tk.Label(root, text='输入MA5数值').grid(row=0, sticky=tk.E)
+        ma5_input = tk.Entry(root)
+        ma5_input.grid(row=0, column=1, sticky=tk.E)
+
+        tk.Label(root, text='输入MA10数值').grid(row=1, sticky=tk.E)
+        ma10_input = tk.Entry(root)
+        ma10_input.grid(row=1, column=1, sticky=tk.E)
+
+        tk.Label(root, text='输入MA30数值').grid(row=2, sticky=tk.E)
+        ma30_input = tk.Entry(root)
+        ma30_input.grid(row=2, column=1, sticky=tk.E)
+        
+        tk.Button(root, text='确定', command=lambda:self.save_ma_to_ini(ma5_input.get(), ma10_input.get(), ma30_input.get())).grid(row=3, column=0, columnspan=2)
+
+        self.root.mainloop()
+
     # 以 0 作为一个k线的开始， 59 结束。
     def get_one_minute_candle_data(self, now_time, one_minute_price):
         open_price = one_minute_price[0]
@@ -209,11 +297,12 @@ class Q_trade:
         df = pd.DataFrame(dataframe)
         df = df.data.rolling(interval).mean()
         return df[len(df) - 1]
-                
+
     def buy_strategy(self, now_price):
         ma5 = self.get_ma(5)
         ma10 = self.get_ma(10)
         ma30 = self.get_ma(30)
+
         if np.isnan(ma5) or np.isnan(ma10) or np.isnan(ma10):
             return
         if ma5 > ma10 and ma10 > ma30 and self.histroy_data_m[-2][5] is 'green':
@@ -241,15 +330,16 @@ class Q_trade:
 
 if __name__ == '__main__':
     gui = Gui()
-    gui.init_btn_position_with_retry()
+    gui.start_main_tk()
+    # gui.init_btn_position_with_retry()
     
-    grab_data = Grab_data()
-    # 开启线程，一个用于截图，5个用于解析图片内容
-    grab_data.start_grab_pic_thread()
-    grab_data.start_get_data_thread()
+    # grab_data = Grab_data()
+    # # 开启线程，一个用于截图，5个用于解析图片内容
+    # grab_data.start_grab_pic_thread()
+    # grab_data.start_get_data_thread()
     
-    q_trade = Q_trade()
-    # 分析上面抓取的数据，量化程序
-    q_trade.get_real_data(grab_data)
+    # q_trade = Q_trade()
+    # # 分析上面抓取的数据，量化程序
+    # q_trade.get_real_data(grab_data)
 
     app.exit()
