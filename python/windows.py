@@ -330,16 +330,20 @@ class Q_trade:
 
 if __name__ == '__main__':
     gui = Gui()
-    gui.start_main_tk()
-    # gui.init_btn_position_with_retry()
+    # gui.start_main_tk()
+    gui.init_btn_position_with_retry()
     
-    # grab_data = Grab_data()
-    # # 开启线程，一个用于截图，5个用于解析图片内容
-    # grab_data.start_grab_pic_thread()
-    # grab_data.start_get_data_thread()
+    grab_data = Grab_data()
     
-    # q_trade = Q_trade()
-    # # 分析上面抓取的数据，量化程序
-    # q_trade.get_real_data(grab_data)
+    # 从浏览器中爬取数据，需要关注获取数据的时间
+    q_trade = Q_trade()
+    q_trade.get_history_data_from_chrome()
+
+    # 开启线程，一个用于截图，5个用于解析图片内容
+    grab_data.start_grab_pic_thread()
+    grab_data.start_get_data_thread()
+    
+    # 分析上面抓取的数据，量化程序
+    q_trade.get_real_data(grab_data)
 
     app.exit()
