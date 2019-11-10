@@ -1,9 +1,200 @@
 Running BrowserMob Proxy using LittleProxy implementation. To revert to the legacy implementation, run the proxy with the command-line option '--use-littleproxy false'.
-[INFO  2019-11-01T22:13:22,819 net.lightbody.bmp.proxy.Main] (main) Starting BrowserMob Proxy version 2.1.4 
-[INFO  2019-11-01T22:13:22,869 org.eclipse.jetty.util.log] (main) jetty-7.x.y-SNAPSHOT 
-[INFO  2019-11-01T22:13:23,091 org.eclipse.jetty.util.log] (main) started o.e.j.s.ServletContextHandler{/,null} 
-[INFO  2019-11-01T22:13:23,432 org.eclipse.jetty.util.log] (main) Started SelectChannelConnector@0.0.0.0:8080 
-[INFO  2019-11-01T22:13:25,247 org.littleshoot.proxy.impl.DefaultHttpProxyServer] (qtp664186542-18) Starting proxy at address: 0.0.0.0/0.0.0.0:8081 
-[INFO  2019-11-01T22:13:25,307 org.littleshoot.proxy.impl.DefaultHttpProxyServer] (qtp664186542-18) Proxy listening with TCP transport 
-[INFO  2019-11-01T22:13:25,667 org.littleshoot.proxy.impl.DefaultHttpProxyServer] (qtp664186542-18) Proxy started at address: /0:0:0:0:0:0:0:0:8081 
-^C
+[INFO  2019-11-09T17:19:17,138 net.lightbody.bmp.proxy.Main] (main) Starting BrowserMob Proxy version 2.1.4 
+[INFO  2019-11-09T17:19:17,198 org.eclipse.jetty.util.log] (main) jetty-7.x.y-SNAPSHOT 
+[INFO  2019-11-09T17:19:17,398 org.eclipse.jetty.util.log] (main) started o.e.j.s.ServletContextHandler{/,null} 
+[INFO  2019-11-09T17:19:17,668 org.eclipse.jetty.util.log] (main) Started SelectChannelConnector@0.0.0.0:8080 
+[INFO  2019-11-09T17:19:19,438 org.littleshoot.proxy.impl.DefaultHttpProxyServer] (qtp664186542-18) Starting proxy at address: 0.0.0.0/0.0.0.0:8081 
+[INFO  2019-11-09T17:19:19,488 org.littleshoot.proxy.impl.DefaultHttpProxyServer] (qtp664186542-18) Proxy listening with TCP transport 
+[INFO  2019-11-09T17:19:19,833 org.littleshoot.proxy.impl.DefaultHttpProxyServer] (qtp664186542-18) Proxy started at address: /0:0:0:0:0:0:0:0:8081 
+[WARN  2019-11-09T17:19:26,126 net.lightbody.bmp.filters.ServerResponseCaptureFilter] (LittleProxy-0-ProxyToServerWorker-0) Cannot decode unsupported content encoding type br 
+[WARN  2019-11-09T17:19:26,126 net.lightbody.bmp.filters.HarCaptureFilter] (LittleProxy-0-ProxyToServerWorker-0) Unable to decompress content with encoding: br. Contents will be encoded as base64 binary data. 
+[WARN  2019-11-09T17:19:26,136 net.lightbody.bmp.filters.ServerResponseCaptureFilter] (LittleProxy-0-ProxyToServerWorker-4) Cannot decode unsupported content encoding type br 
+[WARN  2019-11-09T17:19:26,136 net.lightbody.bmp.filters.HarCaptureFilter] (LittleProxy-0-ProxyToServerWorker-4) Unable to decompress content with encoding: br. Contents will be encoded as base64 binary data. 
+[WARN  2019-11-09T17:19:45,279 net.lightbody.bmp.filters.ServerResponseCaptureFilter] (LittleProxy-0-ProxyToServerWorker-4) Cannot decode unsupported content encoding type br 
+[WARN  2019-11-09T17:19:45,279 net.lightbody.bmp.filters.HarCaptureFilter] (LittleProxy-0-ProxyToServerWorker-4) Unable to decompress content with encoding: br. Contents will be encoded as base64 binary data. 
+[WARN  2019-11-09T17:19:45,501 net.lightbody.bmp.filters.ServerResponseCaptureFilter] (LittleProxy-0-ProxyToServerWorker-4) Cannot decode unsupported content encoding type br 
+[WARN  2019-11-09T17:19:45,501 net.lightbody.bmp.filters.HarCaptureFilter] (LittleProxy-0-ProxyToServerWorker-4) Unable to decompress content with encoding: br. Contents will be encoded as base64 binary data. 
+[INFO  2019-11-09T17:19:47,375 org.littleshoot.proxy.impl.ProxyToServerConnection] (LittleProxy-0-ProxyToServerWorker-2) (CONNECTING) [id: 0x84f598d0]: Connection to upstream server failed io.netty.channel.AbstractChannel$AnnotatedConnectException: Connection timed out: no further information: graph.facebook.com/74.86.228.110:443
+	at sun.nio.ch.SocketChannelImpl.checkConnect(Native Method) ~[?:1.8.0_191]
+	at sun.nio.ch.SocketChannelImpl.finishConnect(Unknown Source) ~[?:1.8.0_191]
+	at io.netty.channel.socket.nio.NioSocketChannel.doFinishConnect(NioSocketChannel.java:346) ~[browsermob-dist-2.1.4.jar:?]
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:340) [browsermob-dist-2.1.4.jar:?]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:639) [browsermob-dist-2.1.4.jar:?]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:574) [browsermob-dist-2.1.4.jar:?]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:488) [browsermob-dist-2.1.4.jar:?]
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:450) [browsermob-dist-2.1.4.jar:?]
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:873) [browsermob-dist-2.1.4.jar:?]
+	at java.lang.Thread.run(Unknown Source) [?:1.8.0_191]
+
+[INFO  2019-11-09T17:19:47,375 org.littleshoot.proxy.impl.ProxyToServerConnection] (LittleProxy-0-ProxyToServerWorker-5) (CONNECTING) [id: 0xf2ea263b]: Connection to upstream server failed io.netty.channel.AbstractChannel$AnnotatedConnectException: Connection timed out: no further information: lh4.googleusercontent.com/172.217.24.1:443
+	at sun.nio.ch.SocketChannelImpl.checkConnect(Native Method) ~[?:1.8.0_191]
+	at sun.nio.ch.SocketChannelImpl.finishConnect(Unknown Source) ~[?:1.8.0_191]
+	at io.netty.channel.socket.nio.NioSocketChannel.doFinishConnect(NioSocketChannel.java:346) ~[browsermob-dist-2.1.4.jar:?]
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:340) [browsermob-dist-2.1.4.jar:?]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:639) [browsermob-dist-2.1.4.jar:?]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:574) [browsermob-dist-2.1.4.jar:?]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:488) [browsermob-dist-2.1.4.jar:?]
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:450) [browsermob-dist-2.1.4.jar:?]
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:873) [browsermob-dist-2.1.4.jar:?]
+	at java.lang.Thread.run(Unknown Source) [?:1.8.0_191]
+
+[INFO  2019-11-09T17:19:47,375 org.littleshoot.proxy.impl.ProxyToServerConnection] (LittleProxy-0-ProxyToServerWorker-3) (CONNECTING) [id: 0x27175bb7]: Connection to upstream server failed io.netty.channel.AbstractChannel$AnnotatedConnectException: Connection timed out: no further information: lh6.googleusercontent.com/172.217.160.97:443
+	at sun.nio.ch.SocketChannelImpl.checkConnect(Native Method) ~[?:1.8.0_191]
+	at sun.nio.ch.SocketChannelImpl.finishConnect(Unknown Source) ~[?:1.8.0_191]
+	at io.netty.channel.socket.nio.NioSocketChannel.doFinishConnect(NioSocketChannel.java:346) ~[browsermob-dist-2.1.4.jar:?]
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:340) [browsermob-dist-2.1.4.jar:?]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:639) [browsermob-dist-2.1.4.jar:?]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:574) [browsermob-dist-2.1.4.jar:?]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:488) [browsermob-dist-2.1.4.jar:?]
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:450) [browsermob-dist-2.1.4.jar:?]
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:873) [browsermob-dist-2.1.4.jar:?]
+	at java.lang.Thread.run(Unknown Source) [?:1.8.0_191]
+
+[INFO  2019-11-09T17:19:49,054 org.littleshoot.proxy.impl.ProxyToServerConnection] (LittleProxy-0-ProxyToServerWorker-1) (CONNECTING) [id: 0xc4418ff0]: Connection to upstream server failed io.netty.channel.AbstractChannel$AnnotatedConnectException: Connection timed out: no further information: lh6.googleusercontent.com/172.217.160.97:443
+	at sun.nio.ch.SocketChannelImpl.checkConnect(Native Method) ~[?:1.8.0_191]
+	at sun.nio.ch.SocketChannelImpl.finishConnect(Unknown Source) ~[?:1.8.0_191]
+	at io.netty.channel.socket.nio.NioSocketChannel.doFinishConnect(NioSocketChannel.java:346) ~[browsermob-dist-2.1.4.jar:?]
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:340) [browsermob-dist-2.1.4.jar:?]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:639) [browsermob-dist-2.1.4.jar:?]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:574) [browsermob-dist-2.1.4.jar:?]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:488) [browsermob-dist-2.1.4.jar:?]
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:450) [browsermob-dist-2.1.4.jar:?]
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:873) [browsermob-dist-2.1.4.jar:?]
+	at java.lang.Thread.run(Unknown Source) [?:1.8.0_191]
+
+[INFO  2019-11-09T17:19:49,146 org.littleshoot.proxy.impl.ProxyToServerConnection] (LittleProxy-0-ProxyToServerWorker-2) (CONNECTING) [id: 0x9f799879]: Connection to upstream server failed io.netty.channel.AbstractChannel$AnnotatedConnectException: Connection timed out: no further information: graph.facebook.com/74.86.228.110:443
+	at sun.nio.ch.SocketChannelImpl.checkConnect(Native Method) ~[?:1.8.0_191]
+	at sun.nio.ch.SocketChannelImpl.finishConnect(Unknown Source) ~[?:1.8.0_191]
+	at io.netty.channel.socket.nio.NioSocketChannel.doFinishConnect(NioSocketChannel.java:346) ~[browsermob-dist-2.1.4.jar:?]
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:340) [browsermob-dist-2.1.4.jar:?]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:639) [browsermob-dist-2.1.4.jar:?]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:574) [browsermob-dist-2.1.4.jar:?]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:488) [browsermob-dist-2.1.4.jar:?]
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:450) [browsermob-dist-2.1.4.jar:?]
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:873) [browsermob-dist-2.1.4.jar:?]
+	at java.lang.Thread.run(Unknown Source) [?:1.8.0_191]
+
+[INFO  2019-11-09T17:19:49,151 org.littleshoot.proxy.impl.ProxyToServerConnection] (LittleProxy-0-ProxyToServerWorker-3) (CONNECTING) [id: 0x691d14ae]: Connection to upstream server failed io.netty.channel.AbstractChannel$AnnotatedConnectException: Connection timed out: no further information: lh5.googleusercontent.com/172.217.27.129:443
+	at sun.nio.ch.SocketChannelImpl.checkConnect(Native Method) ~[?:1.8.0_191]
+	at sun.nio.ch.SocketChannelImpl.finishConnect(Unknown Source) ~[?:1.8.0_191]
+	at io.netty.channel.socket.nio.NioSocketChannel.doFinishConnect(NioSocketChannel.java:346) ~[browsermob-dist-2.1.4.jar:?]
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:340) [browsermob-dist-2.1.4.jar:?]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:639) [browsermob-dist-2.1.4.jar:?]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:574) [browsermob-dist-2.1.4.jar:?]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:488) [browsermob-dist-2.1.4.jar:?]
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:450) [browsermob-dist-2.1.4.jar:?]
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:873) [browsermob-dist-2.1.4.jar:?]
+	at java.lang.Thread.run(Unknown Source) [?:1.8.0_191]
+
+[INFO  2019-11-09T17:19:49,231 org.littleshoot.proxy.impl.ProxyToServerConnection] (LittleProxy-0-ProxyToServerWorker-4) (CONNECTING) [id: 0x1a5d4512]: Connection to upstream server failed io.netty.channel.AbstractChannel$AnnotatedConnectException: Connection timed out: no further information: lh4.googleusercontent.com/172.217.24.1:443
+	at sun.nio.ch.SocketChannelImpl.checkConnect(Native Method) ~[?:1.8.0_191]
+	at sun.nio.ch.SocketChannelImpl.finishConnect(Unknown Source) ~[?:1.8.0_191]
+	at io.netty.channel.socket.nio.NioSocketChannel.doFinishConnect(NioSocketChannel.java:346) ~[browsermob-dist-2.1.4.jar:?]
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:340) [browsermob-dist-2.1.4.jar:?]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:639) [browsermob-dist-2.1.4.jar:?]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:574) [browsermob-dist-2.1.4.jar:?]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:488) [browsermob-dist-2.1.4.jar:?]
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:450) [browsermob-dist-2.1.4.jar:?]
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:873) [browsermob-dist-2.1.4.jar:?]
+	at java.lang.Thread.run(Unknown Source) [?:1.8.0_191]
+
+[INFO  2019-11-09T17:19:49,330 org.littleshoot.proxy.impl.ProxyToServerConnection] (LittleProxy-0-ProxyToServerWorker-5) (CONNECTING) [id: 0xbb0ec2b2]: Connection to upstream server failed io.netty.channel.AbstractChannel$AnnotatedConnectException: Connection timed out: no further information: graph.facebook.com/74.86.228.110:443
+	at sun.nio.ch.SocketChannelImpl.checkConnect(Native Method) ~[?:1.8.0_191]
+	at sun.nio.ch.SocketChannelImpl.finishConnect(Unknown Source) ~[?:1.8.0_191]
+	at io.netty.channel.socket.nio.NioSocketChannel.doFinishConnect(NioSocketChannel.java:346) ~[browsermob-dist-2.1.4.jar:?]
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:340) [browsermob-dist-2.1.4.jar:?]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:639) [browsermob-dist-2.1.4.jar:?]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:574) [browsermob-dist-2.1.4.jar:?]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:488) [browsermob-dist-2.1.4.jar:?]
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:450) [browsermob-dist-2.1.4.jar:?]
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:873) [browsermob-dist-2.1.4.jar:?]
+	at java.lang.Thread.run(Unknown Source) [?:1.8.0_191]
+
+[INFO  2019-11-09T17:19:49,951 org.littleshoot.proxy.impl.ProxyToServerConnection] (LittleProxy-0-ProxyToServerWorker-0) (CONNECTING) [id: 0xf6a13a39]: Connection to upstream server failed io.netty.channel.AbstractChannel$AnnotatedConnectException: Connection timed out: no further information: graph.facebook.com/74.86.228.110:443
+	at sun.nio.ch.SocketChannelImpl.checkConnect(Native Method) ~[?:1.8.0_191]
+	at sun.nio.ch.SocketChannelImpl.finishConnect(Unknown Source) ~[?:1.8.0_191]
+	at io.netty.channel.socket.nio.NioSocketChannel.doFinishConnect(NioSocketChannel.java:346) ~[browsermob-dist-2.1.4.jar:?]
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:340) [browsermob-dist-2.1.4.jar:?]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:639) [browsermob-dist-2.1.4.jar:?]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:574) [browsermob-dist-2.1.4.jar:?]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:488) [browsermob-dist-2.1.4.jar:?]
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:450) [browsermob-dist-2.1.4.jar:?]
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:873) [browsermob-dist-2.1.4.jar:?]
+	at java.lang.Thread.run(Unknown Source) [?:1.8.0_191]
+
+[INFO  2019-11-09T17:19:50,070 org.littleshoot.proxy.impl.ProxyToServerConnection] (LittleProxy-0-ProxyToServerWorker-2) (CONNECTING) [id: 0x3f95568e]: Connection to upstream server failed io.netty.channel.AbstractChannel$AnnotatedConnectException: Connection timed out: no further information: lh4.googleusercontent.com/172.217.24.1:443
+	at sun.nio.ch.SocketChannelImpl.checkConnect(Native Method) ~[?:1.8.0_191]
+	at sun.nio.ch.SocketChannelImpl.finishConnect(Unknown Source) ~[?:1.8.0_191]
+	at io.netty.channel.socket.nio.NioSocketChannel.doFinishConnect(NioSocketChannel.java:346) ~[browsermob-dist-2.1.4.jar:?]
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:340) [browsermob-dist-2.1.4.jar:?]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:639) [browsermob-dist-2.1.4.jar:?]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:574) [browsermob-dist-2.1.4.jar:?]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:488) [browsermob-dist-2.1.4.jar:?]
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:450) [browsermob-dist-2.1.4.jar:?]
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:873) [browsermob-dist-2.1.4.jar:?]
+	at java.lang.Thread.run(Unknown Source) [?:1.8.0_191]
+
+[WARN  2019-11-09T17:19:52,736 net.lightbody.bmp.filters.HarCaptureFilter] (LittleProxy-0-ProxyToServerWorker-0) No content type specified in response from /echo/935/bgc89hdm/websocket. Content will be treated as application/octet-stream 
+[INFO  2019-11-09T17:19:52,738 org.littleshoot.proxy.impl.ClientToProxyConnection] (LittleProxy-0-ClientToProxyWorker-1) (AWAITING_INITIAL) [id: 0xdd066b4a, L:/0:0:0:0:0:0:0:1:8081 - R:/0:0:0:0:0:0:0:1:9716]: An IOException occurred on ClientToProxyConnection: 你的主机中的软件中止了一个已建立的连接。 
+[INFO  2019-11-09T17:19:53,975 org.littleshoot.proxy.impl.ProxyToServerConnection] (LittleProxy-0-ProxyToServerWorker-2) (CONNECTING) [id: 0x8c7ea3bf]: Connection to upstream server failed io.netty.channel.AbstractChannel$AnnotatedConnectException: Connection timed out: no further information: graph.facebook.com/74.86.228.110:443
+	at sun.nio.ch.SocketChannelImpl.checkConnect(Native Method) ~[?:1.8.0_191]
+	at sun.nio.ch.SocketChannelImpl.finishConnect(Unknown Source) ~[?:1.8.0_191]
+	at io.netty.channel.socket.nio.NioSocketChannel.doFinishConnect(NioSocketChannel.java:346) ~[browsermob-dist-2.1.4.jar:?]
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:340) [browsermob-dist-2.1.4.jar:?]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:639) [browsermob-dist-2.1.4.jar:?]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:574) [browsermob-dist-2.1.4.jar:?]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:488) [browsermob-dist-2.1.4.jar:?]
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:450) [browsermob-dist-2.1.4.jar:?]
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:873) [browsermob-dist-2.1.4.jar:?]
+	at java.lang.Thread.run(Unknown Source) [?:1.8.0_191]
+
+[INFO  2019-11-09T17:20:10,674 org.littleshoot.proxy.impl.ProxyToServerConnection] (LittleProxy-0-ProxyToServerWorker-6) (CONNECTING) [id: 0xa36e8906]: Connection to upstream server failed io.netty.channel.AbstractChannel$AnnotatedConnectException: Connection timed out: no further information: rules.quantcount.com/13.35.37.57:443
+	at sun.nio.ch.SocketChannelImpl.checkConnect(Native Method) ~[?:1.8.0_191]
+	at sun.nio.ch.SocketChannelImpl.finishConnect(Unknown Source) ~[?:1.8.0_191]
+	at io.netty.channel.socket.nio.NioSocketChannel.doFinishConnect(NioSocketChannel.java:346) ~[browsermob-dist-2.1.4.jar:?]
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:340) [browsermob-dist-2.1.4.jar:?]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:639) [browsermob-dist-2.1.4.jar:?]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:574) [browsermob-dist-2.1.4.jar:?]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:488) [browsermob-dist-2.1.4.jar:?]
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:450) [browsermob-dist-2.1.4.jar:?]
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:873) [browsermob-dist-2.1.4.jar:?]
+	at java.lang.Thread.run(Unknown Source) [?:1.8.0_191]
+
+[WARN  2019-11-09T17:20:14,571 net.lightbody.bmp.filters.ServerResponseCaptureFilter] (LittleProxy-0-ProxyToServerWorker-4) Cannot decode unsupported content encoding type br 
+[WARN  2019-11-09T17:20:14,571 net.lightbody.bmp.filters.HarCaptureFilter] (LittleProxy-0-ProxyToServerWorker-4) Unable to decompress content with encoding: br. Contents will be encoded as base64 binary data. 
+[INFO  2019-11-09T17:20:18,177 org.littleshoot.proxy.impl.ClientToProxyConnection] (LittleProxy-0-ClientToProxyWorker-3) (AWAITING_INITIAL) [id: 0x28d22976, L:/0:0:0:0:0:0:0:1:8081 - R:/0:0:0:0:0:0:0:1:9625]: An IOException occurred on ClientToProxyConnection: 远程主机强迫关闭了一个现有的连接。 
+[INFO  2019-11-09T17:20:18,182 org.littleshoot.proxy.impl.ClientToProxyConnection] (LittleProxy-0-ClientToProxyWorker-5) (AWAITING_INITIAL) [id: 0x1bb591de, L:/0:0:0:0:0:0:0:1:8081 - R:/0:0:0:0:0:0:0:1:9558]: An IOException occurred on ClientToProxyConnection: 远程主机强迫关闭了一个现有的连接。 
+[INFO  2019-11-09T17:20:18,185 org.littleshoot.proxy.impl.ClientToProxyConnection] (LittleProxy-0-ClientToProxyWorker-0) (AWAITING_INITIAL) [id: 0xa8c45cfc, L:/0:0:0:0:0:0:0:1:8081 - R:/0:0:0:0:0:0:0:1:9639]: An IOException occurred on ClientToProxyConnection: 远程主机强迫关闭了一个现有的连接。 
+[INFO  2019-11-09T17:20:18,197 org.littleshoot.proxy.impl.ClientToProxyConnection] (LittleProxy-0-ClientToProxyWorker-0) (AWAITING_INITIAL) [id: 0x55d4d9e1, L:/0:0:0:0:0:0:0:1:8081 - R:/0:0:0:0:0:0:0:1:9680]: An IOException occurred on ClientToProxyConnection: 远程主机强迫关闭了一个现有的连接。 
+[INFO  2019-11-09T17:20:18,199 org.littleshoot.proxy.impl.ClientToProxyConnection] (LittleProxy-0-ClientToProxyWorker-1) (AWAITING_INITIAL) [id: 0x130426df, L:/0:0:0:0:0:0:0:1:8081 - R:/0:0:0:0:0:0:0:1:9744]: An IOException occurred on ClientToProxyConnection: 远程主机强迫关闭了一个现有的连接。 
+[INFO  2019-11-09T17:20:18,200 org.littleshoot.proxy.impl.ClientToProxyConnection] (LittleProxy-0-ClientToProxyWorker-4) (AWAITING_INITIAL) [id: 0x39c12c50, L:/0:0:0:0:0:0:0:1:8081 - R:/0:0:0:0:0:0:0:1:9703]: An IOException occurred on ClientToProxyConnection: 远程主机强迫关闭了一个现有的连接。 
+[INFO  2019-11-09T17:20:18,202 org.littleshoot.proxy.impl.ClientToProxyConnection] (LittleProxy-0-ClientToProxyWorker-6) (AWAITING_INITIAL) [id: 0x62804493, L:/0:0:0:0:0:0:0:1:8081 - R:/0:0:0:0:0:0:0:1:9692]: An IOException occurred on ClientToProxyConnection: 远程主机强迫关闭了一个现有的连接。 
+[INFO  2019-11-09T17:20:18,202 org.littleshoot.proxy.impl.ClientToProxyConnection] (LittleProxy-0-ClientToProxyWorker-7) (AWAITING_INITIAL) [id: 0x00032e12, L:/0:0:0:0:0:0:0:1:8081 - R:/0:0:0:0:0:0:0:1:9616]: An IOException occurred on ClientToProxyConnection: 远程主机强迫关闭了一个现有的连接。 
+[INFO  2019-11-09T17:20:18,203 org.littleshoot.proxy.impl.ClientToProxyConnection] (LittleProxy-0-ClientToProxyWorker-6) (AWAITING_INITIAL) [id: 0xec1f815b, L:/0:0:0:0:0:0:0:1:8081 - R:/0:0:0:0:0:0:0:1:9559]: An IOException occurred on ClientToProxyConnection: 远程主机强迫关闭了一个现有的连接。 
+[INFO  2019-11-09T17:20:18,204 org.littleshoot.proxy.impl.ClientToProxyConnection] (LittleProxy-0-ClientToProxyWorker-4) (AWAITING_INITIAL) [id: 0xe81dc5d9, L:/0:0:0:0:0:0:0:1:8081 - R:/0:0:0:0:0:0:0:1:9665]: An IOException occurred on ClientToProxyConnection: 远程主机强迫关闭了一个现有的连接。 
+[INFO  2019-11-09T17:20:18,205 org.littleshoot.proxy.impl.ClientToProxyConnection] (LittleProxy-0-ClientToProxyWorker-1) (AWAITING_INITIAL) [id: 0xde1b64a0, L:/0:0:0:0:0:0:0:1:8081 - R:/0:0:0:0:0:0:0:1:9572]: An IOException occurred on ClientToProxyConnection: 远程主机强迫关闭了一个现有的连接。 
+[INFO  2019-11-09T17:20:18,206 org.littleshoot.proxy.impl.ClientToProxyConnection] (LittleProxy-0-ClientToProxyWorker-0) (AWAITING_INITIAL) [id: 0xa934db87, L:/0:0:0:0:0:0:0:1:8081 - R:/0:0:0:0:0:0:0:1:9698]: An IOException occurred on ClientToProxyConnection: 远程主机强迫关闭了一个现有的连接。 
+[INFO  2019-11-09T17:20:18,209 org.littleshoot.proxy.impl.ClientToProxyConnection] (LittleProxy-0-ClientToProxyWorker-5) (AWAITING_INITIAL) [id: 0xda608a35, L:/0:0:0:0:0:0:0:1:8081 - R:/0:0:0:0:0:0:0:1:9658]: An IOException occurred on ClientToProxyConnection: 远程主机强迫关闭了一个现有的连接。 
+[INFO  2019-11-09T17:20:18,209 org.littleshoot.proxy.impl.ClientToProxyConnection] (LittleProxy-0-ClientToProxyWorker-7) (AWAITING_INITIAL) [id: 0xaa652e09, L:/0:0:0:0:0:0:0:1:8081 - R:/0:0:0:0:0:0:0:1:9581]: An IOException occurred on ClientToProxyConnection: 远程主机强迫关闭了一个现有的连接。 
+[INFO  2019-11-09T17:20:18,211 org.littleshoot.proxy.impl.ClientToProxyConnection] (LittleProxy-0-ClientToProxyWorker-3) (AWAITING_INITIAL) [id: 0x58634e81, L:/0:0:0:0:0:0:0:1:8081 - R:/0:0:0:0:0:0:0:1:9750]: An IOException occurred on ClientToProxyConnection: 远程主机强迫关闭了一个现有的连接。 
+[INFO  2019-11-09T17:20:18,211 org.littleshoot.proxy.impl.ClientToProxyConnection] (LittleProxy-0-ClientToProxyWorker-4) (AWAITING_INITIAL) [id: 0x9f144d49, L:/0:0:0:0:0:0:0:1:8081 - R:/0:0:0:0:0:0:0:1:9656]: An IOException occurred on ClientToProxyConnection: 远程主机强迫关闭了一个现有的连接。 
+[INFO  2019-11-09T17:20:18,212 org.littleshoot.proxy.impl.ClientToProxyConnection] (LittleProxy-0-ClientToProxyWorker-0) (AWAITING_INITIAL) [id: 0x68a9c8f2, L:/0:0:0:0:0:0:0:1:8081 - R:/0:0:0:0:0:0:0:1:9742]: An IOException occurred on ClientToProxyConnection: 远程主机强迫关闭了一个现有的连接。 
+[INFO  2019-11-09T17:20:18,214 org.littleshoot.proxy.impl.ClientToProxyConnection] (LittleProxy-0-ClientToProxyWorker-1) (AWAITING_INITIAL) [id: 0x7491bf46, L:/0:0:0:0:0:0:0:1:8081 - R:/0:0:0:0:0:0:0:1:9700]: An IOException occurred on ClientToProxyConnection: 远程主机强迫关闭了一个现有的连接。 
+[INFO  2019-11-09T17:20:18,214 org.littleshoot.proxy.impl.ClientToProxyConnection] (LittleProxy-0-ClientToProxyWorker-2) (AWAITING_INITIAL) [id: 0x203fc03d, L:/0:0:0:0:0:0:0:1:8081 - R:/0:0:0:0:0:0:0:1:9748]: An IOException occurred on ClientToProxyConnection: 远程主机强迫关闭了一个现有的连接。 
+[INFO  2019-11-09T17:20:18,214 org.littleshoot.proxy.impl.ClientToProxyConnection] (LittleProxy-0-ClientToProxyWorker-4) (AWAITING_INITIAL) [id: 0xcfc74751, L:/0:0:0:0:0:0:0:1:8081 - R:/0:0:0:0:0:0:0:1:9688]: An IOException occurred on ClientToProxyConnection: 远程主机强迫关闭了一个现有的连接。 
+[INFO  2019-11-09T17:20:18,216 org.littleshoot.proxy.impl.ClientToProxyConnection] (LittleProxy-0-ClientToProxyWorker-6) (AWAITING_INITIAL) [id: 0xdd2eb324, L:/0:0:0:0:0:0:0:1:8081 - R:/0:0:0:0:0:0:0:1:9614]: An IOException occurred on ClientToProxyConnection: 远程主机强迫关闭了一个现有的连接。 
+[INFO  2019-11-09T17:20:18,216 org.littleshoot.proxy.impl.ClientToProxyConnection] (LittleProxy-0-ClientToProxyWorker-5) (AWAITING_INITIAL) [id: 0x01c5322b, L:/0:0:0:0:0:0:0:1:8081 - R:/0:0:0:0:0:0:0:1:9709]: An IOException occurred on ClientToProxyConnection: 远程主机强迫关闭了一个现有的连接。 
+[INFO  2019-11-09T17:20:18,216 org.littleshoot.proxy.impl.ClientToProxyConnection] (LittleProxy-0-ClientToProxyWorker-3) (AWAITING_INITIAL) [id: 0xf2077671, L:/0:0:0:0:0:0:0:1:8081 - R:/0:0:0:0:0:0:0:1:9645]: An IOException occurred on ClientToProxyConnection: 远程主机强迫关闭了一个现有的连接。 
+[INFO  2019-11-09T17:20:18,217 org.littleshoot.proxy.impl.ClientToProxyConnection] (LittleProxy-0-ClientToProxyWorker-2) (AWAITING_INITIAL) [id: 0xb0d201c1, L:/0:0:0:0:0:0:0:1:8081 - R:/0:0:0:0:0:0:0:1:9701]: An IOException occurred on ClientToProxyConnection: 远程主机强迫关闭了一个现有的连接。 
+[INFO  2019-11-09T17:20:18,217 org.littleshoot.proxy.impl.ClientToProxyConnection] (LittleProxy-0-ClientToProxyWorker-3) (AWAITING_INITIAL) [id: 0xde85d533, L:/0:0:0:0:0:0:0:1:8081 - R:/0:0:0:0:0:0:0:1:9702]: An IOException occurred on ClientToProxyConnection: 远程主机强迫关闭了一个现有的连接。 
+[INFO  2019-11-09T17:20:18,220 org.littleshoot.proxy.impl.ClientToProxyConnection] (LittleProxy-0-ClientToProxyWorker-4) (NEGOTIATING_CONNECT) [id: 0x30e94bb4, L:/0:0:0:0:0:0:0:1:8081 - R:/0:0:0:0:0:0:0:1:9753]: An IOException occurred on ClientToProxyConnection: 远程主机强迫关闭了一个现有的连接。 
+[INFO  2019-11-09T17:20:18,220 org.littleshoot.proxy.impl.ClientToProxyConnection] (LittleProxy-0-ClientToProxyWorker-5) (AWAITING_INITIAL) [id: 0x24fc6e50, L:/0:0:0:0:0:0:0:1:8081 - R:/0:0:0:0:0:0:0:1:9734]: An IOException occurred on ClientToProxyConnection: 远程主机强迫关闭了一个现有的连接。 
+[INFO  2019-11-09T17:20:18,222 org.littleshoot.proxy.impl.ProxyToServerConnection] (LittleProxy-0-ProxyToServerWorker-4) (HANDSHAKING) [id: 0x63eeeb62, L:0.0.0.0/0.0.0.0:9754 ! R:hm.baidu.com/106.120.159.126:443]: Connection to upstream server failed java.nio.channels.ClosedChannelException: null
+	at io.netty.handler.ssl.SslHandler.channelInactive(...)(Unknown Source) ~[browsermob-dist-2.1.4.jar:?]
+
+[INFO  2019-11-09T17:20:18,222 org.littleshoot.proxy.impl.ClientToProxyConnection] (LittleProxy-0-ClientToProxyWorker-5) (AWAITING_INITIAL) [id: 0xd973ca2a, L:/0:0:0:0:0:0:0:1:8081 - R:/0:0:0:0:0:0:0:1:9691]: An IOException occurred on ClientToProxyConnection: 远程主机强迫关闭了一个现有的连接。 
+[INFO  2019-11-09T17:20:18,222 org.littleshoot.proxy.impl.ClientToProxyConnection] (LittleProxy-0-ClientToProxyWorker-7) (AWAITING_INITIAL) [id: 0x1fa6065a, L:/0:0:0:0:0:0:0:1:8081 - R:/0:0:0:0:0:0:0:1:9693]: An IOException occurred on ClientToProxyConnection: 远程主机强迫关闭了一个现有的连接。 
+[INFO  2019-11-09T17:20:30,449 org.littleshoot.proxy.impl.ProxyToServerConnection] (LittleProxy-0-ProxyToServerWorker-6) (HANDSHAKING) [id: 0x46fe3124, L:0.0.0.0/0.0.0.0:9737 ! R:ib.adnxs.com/103.43.90.53:443]: Connection to upstream server failed javax.net.ssl.SSLException: handshake timed out
+	at io.netty.handler.ssl.SslHandler.handshake(...)(Unknown Source) ~[browsermob-dist-2.1.4.jar:?]
+
+[INFO  2019-11-09T17:20:30,449 org.littleshoot.proxy.impl.ClientToProxyConnection] (LittleProxy-0-ClientToProxyWorker-6) (NEGOTIATING_CONNECT) [id: 0xb44d5d60, L:/0:0:0:0:0:0:0:1:8081 - R:/0:0:0:0:0:0:0:1:9736]: An IOException occurred on ClientToProxyConnection: 远程主机强迫关闭了一个现有的连接。 
