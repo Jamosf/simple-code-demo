@@ -7,6 +7,7 @@ import os
 import configparser
 import time
 from aip import AipOcr
+from looger import *
 
 app = QApplication(sys.argv)
 screen = QApplication.primaryScreen()
@@ -19,9 +20,6 @@ class Click:
         self.grab_pos = [0, 0, 0, 0]
         self.is_find_btn = False
         self.is_find_grab_area = False
-        desktop = QApplication.desktop()
-        self.display_height = desktop.screenGeometry().height()
-        self.display_width = desktop.screenGeometry().width()
         config = configparser.ConfigParser()
         config.read('config.ini', encoding='utf-8')
         self.form_name_test = config.get('app', 'name')
@@ -34,6 +32,7 @@ class Click:
         self.secretKey = config.get('baidu', 'secretKey')
         self.factor = float(config.get('grabconf', 'desktopFactor'))
         self.handle = win32gui.FindWindow(None, self.form_name_test)
+        _, _, self.display_width, self.display_height = win32gui.GetWindowRect(self.handle)
     
     def get_pos_from_msg(self, msg):
         for i in msg.get('words_result'):
@@ -55,27 +54,34 @@ class Click:
                 self.grab_pos[3] = i.get('location')['height']
     
     def init_btn_position(self):
-        win32gui.ShowWindow(self.handle, win32con.SW_RESTORE)
-        win32gui.SetForegroundWindow(self.handle)
-        time.sleep(2)
-        img = screen.grabWindow(self.handle, self.display_width*self.factor, 0, self.display_width, self.display_height).toImage()
-        img.save('desktop.png')
-        with open('desktop.png', 'rb') as f:
-            img_content = f.read()
-            client = AipOcr(self.appId, self.apiKey, self.secretKey)
-            msg = client.accurate(img_content)
-            # print(msg.get('words_result'))
-            if msg.get('words_result') is None:
-                print('desktop图片失败出错！请检查desktop图片是否正常.')
+        logger.info("init_btn_position start")
+        try:
+            win32gui.ShowWindow(self.handle, win32con.SW_RESTORE)
+            # win32gui.SetForegroundWindow(self.handle)
+            time.sleep(2)
+            print(self.display_width*self.factor, 0, self.display_width, self.display_height)
+            img = screen.grabWindow(self.handle, self.display_width*self.factor, 0, self.display_width, self.display_height).toImage()
+            img.save('desktop.png')
+            with open('desktop.png', 'rb') as f:
+                img_content = f.read()
+                client = AipOcr(self.appId, self.apiKey, self.secretKey)
+                msg = client.accurate(img_content)
+                if msg.get('words_result') is None:
+                    print('desktop图片失败出错！请检查desktop图片是否正常.')
+                    f.close()
+                    return
+                self.get_pos_from_msg(msg)
                 f.close()
-                return
-            self.get_pos_from_msg(msg)
-            f.close()
-            os.remove('desktop.png')
+                os.remove('desktop.png')
+        except:
+            logger.info("init_btn_position failed")
+        else:
+            logger.info("init_btn_position success")
             
     def init_btn_position_with_retry(self):
         while self.is_find_btn is False or self.is_find_grab_area is False:
             self.init_btn_position()
+            time.sleep(5)
     
     def click_windows(self, x, y):
         postion = win32api.GetCursorPos()
@@ -134,11 +140,12 @@ class Gui:
     
 if __name__ == '__main__':
     # 测试click功能
-    # click = Click()
+    click = Click()
+    click.init_btn_position()
     # click.init_btn_position_with_retry()
-    # click.printKeyInfo()
-    # click.click_buy_long()
+    click.printKeyInfo()
+    click.click_buy_long()
     
     # 测试gui功能
-    gui = Gui()
-    gui.start_main_tk()
+    # gui = Gui()
+    # gui.start_main_tk()

@@ -16,6 +16,8 @@ import json
 import configparser
 import gui_click as gc
 
+from looger import *
+
 app = QApplication(sys.argv)
 screen = QApplication.primaryScreen()
 
@@ -39,6 +41,7 @@ class Grab_data:
     def grab_and_save_img(self):
         while True:
             img = screen.grabWindow(self.handle, self.click.grab_pos[0], self.click.grab_pos[1], self.click.grab_pos[2], self.click.grab_pos[3]).toImage()
+            # print(type(img))
             list = [int(round(time.time())), img]
             self.picList.append(list)
             time.sleep(1)
@@ -49,6 +52,7 @@ class Grab_data:
     def parse_img(self, img, t):
         img.save(str(t) + '.png')
         try:
+            logger.info("parse image start")
             with open(str(t) + '.png', 'rb') as f:
                 img_content = f.read()
                 client = AipOcr(self.appId, self.apiKey, self.secretKey)
@@ -58,9 +62,11 @@ class Grab_data:
                     return
                 for i in msg.get('words_result'):
                     if self.word in i.get('words'):
-                        print([t, (i.get('words'))[-5:], time.time()])
+                        logger.debug([t, (i.get('words'))[-5:], time.time()])
                         self.data_list.append([t, (i.get('words'))[-5:]])
                         break
+        except:
+            logger.info("parse image failed")
         finally:
             f.close()
             os.remove(str(t) + '.png')
@@ -81,8 +87,10 @@ class Grab_data:
             Thread(target=self.get_data_from_img).start()
         
     def run(self):
+        logger.info("grab data start")
         self.start_grab_pic_thread()
         self.start_get_data_thread()
+        logger.info("grab data end")
             
 class Crawl_data:
     def __init__(self):
@@ -111,6 +119,7 @@ class Crawl_data:
     
     def get_history_data_from_chrome(self):
         try:
+            logger.info("get_history_data_from_chrome start")
             self.driver.get(self.canle_url)
             # 切换到分钟k线的界面
             self.driver.find_element_by_css_selector(".fchart-switches-timeframes a").click()
@@ -130,17 +139,21 @@ class Crawl_data:
                         self.close_price_list.append(_candle[-1])
             self.histroy_data_m = self.histroy_data_m[-31:-1]
             self.close_price_list = self.close_price_list[-31:-1]
-        finally:
+        except:
+            logger.info("get_history_data_from_chrome failed")
+        else:
             self.server.stop()
             self.driver.close()
             self.driver.quit()
+            logger.info("get_history_data_from_chrome success")
     
     def printKeyInfo(self):
         print(self.histroy_data_m)
         print(self.close_price_list)
         
     def run(self):
-        self.get_history_data_from_chrome()
+        print("fake start")
+        # self.get_history_data_from_chrome()
     
 if __name__ == '__main__':
     # 测试截图获取数据功能
