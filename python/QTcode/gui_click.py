@@ -14,25 +14,31 @@ screen = QApplication.primaryScreen()
 
 class Click:
     def __init__(self):
-        self.buy_long_btn_pos = [0, 0]
-        self.buy_short_btn_pos = [0, 0]
-        self.sell_btn_pos = [0, 0]
-        self.grab_pos = [0, 0, 0, 0]
         self.is_find_btn = False
         self.is_find_grab_area = False
-        config = configparser.ConfigParser()
-        config.read('config.ini', encoding='utf-8')
-        self.form_name_test = config.get('app', 'name')
-        self.buy_long_btn = config.get('app', 'buyLongBtn')
-        self.buy_short_btn = config.get('app', 'buyShortBtn')
-        self.sell_btn = config.get('app', 'sellBtn')
-        self.now_price = config.get('app', 'nowPrice')
-        self.appId = config.get('baidu', 'appId')
-        self.apiKey = config.get('baidu', 'apiKey')
-        self.secretKey = config.get('baidu', 'secretKey')
-        self.factor = float(config.get('grabconf', 'desktopFactor'))
+        self.is_find_hold_btn = False
+        self.config = configparser.ConfigParser()
+        self.config.read('config.ini', encoding='utf-8')
+        self.form_name_test = self.config.get('app', 'name')
+        self.buy_long_btn = self.config.get('app', 'buyLongBtn')
+        self.buy_short_btn = self.config.get('app', 'buyShortBtn')
+        self.sell_btn = self.config.get('app', 'sellBtn')
+        self.now_price = self.config.get('app', 'nowPrice')
+        self.hold = self.config.get('app', 'hold')
+        self.appId = self.config.get('baidu', 'appId')
+        self.apiKey = self.config.get('baidu', 'apiKey')
+        self.secretKey = self.config.get('baidu', 'secretKey')
+        self.factor = float(self.config.get('grabconf', 'desktopFactor'))
+        self.buy_long_btn_pos = self.get_pos_from_config('buyLong')
+        self.buy_short_btn_pos = self.get_pos_from_config('buyShort')
+        self.sell_btn_pos = self.get_pos_from_config('sell')
+        self.grab_pos = self.get_pos_from_config('price')
+        self.hold_pos = self.get_pos_from_config('hold')
         self.handle = win32gui.FindWindow(None, self.form_name_test)
         _, _, self.display_width, self.display_height = win32gui.GetWindowRect(self.handle)
+    
+    def get_pos_from_config(self, name):
+        return list(map(float, self.config.get('pos', name).split(',')))
     
     def get_pos_from_msg(self, msg):
         for i in msg.get('words_result'):
@@ -45,47 +51,71 @@ class Click:
                 self.buy_short_btn_pos[1] = i.get('location')['top']
                 
                 self.sell_btn_pos[0] = int(i.get('location')['left'] + i.get('location')['width'] * 5 / 6 + self.display_width*self.factor)
-                self.sell_btn_pos[1] = i.get('location')['top']    
+                self.sell_btn_pos[1] = i.get('location')['top'] 
+
             if self.now_price in i.get('words'):
                 self.is_find_grab_area = True
                 self.grab_pos[0] = i.get('location')['left'] + self.display_width*self.factor
                 self.grab_pos[1] = i.get('location')['top']
                 self.grab_pos[2] = i.get('location')['width']
                 self.grab_pos[3] = i.get('location')['height']
+            
+            if self.hold in i.get('words'):
+                self.is_find_hold_btn = True
+                self.hold_pos[0] = i.get('location')['left']
+                # 可平量往下偏移30个单位
+                self.hold_pos[1] = i.get('location')['top'] + 30
     
     def init_btn_position(self):
         logger.info("init_btn_position start")
         try:
-            win32gui.ShowWindow(self.handle, win32con.SW_RESTORE)
-            # win32gui.SetForegroundWindow(self.handle)
-            time.sleep(2)
-            print(self.display_width*self.factor, 0, self.display_width, self.display_height)
-            img = screen.grabWindow(self.handle, self.display_width*self.factor, 0, self.display_width, self.display_height).toImage()
-            img.save('desktop.png')
+            if os.path.exists('desktop.png') is False:
+                win32gui.ShowWindow(self.handle, win32con.SW_RESTORE)
+                win32gui.SetForegroundWindow(self.handle)
+                time.sleep(2)
+                print(self.display_width*self.factor, 0, self.display_width, self.display_height)
+                img = screen.grabWindow(self.handle, self.display_width*self.factor, 0, self.display_width, self.display_height).toImage()
+                img.save('desktop.png')
             with open('desktop.png', 'rb') as f:
                 img_content = f.read()
                 client = AipOcr(self.appId, self.apiKey, self.secretKey)
                 msg = client.accurate(img_content)
+                print(msg)
+                logger.info(msg)
                 if msg.get('words_result') is None:
                     print('desktop图片失败出错！请检查desktop图片是否正常.')
                     f.close()
                     return
                 self.get_pos_from_msg(msg)
                 f.close()
-                os.remove('desktop.png')
+                # os.remove('desktop.png')
         except:
             logger.info("init_btn_position failed")
         else:
             logger.info("init_btn_position success")
             
     def init_btn_position_with_retry(self):
-        while self.is_find_btn is False or self.is_find_grab_area is False:
+        if any(self.buy_long_btn_pos) is True and any(self.buy_short_btn_pos) is True and any(self.sell_btn_pos) is True and any(self.grab_pos) is True and any(self.hold_pos) is True:
+            logger.info("read position from config success")
+            return
+        while self.is_find_btn is False or self.is_find_grab_area is False or is_find_hold_btn is False:
             self.init_btn_position()
             time.sleep(5)
+        # 将获取到的坐标位置保存到配置文件中
+        self.set_pos_to_config()
+
+    def set_pos_to_config(self):
+        print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
+        self.config.set('pos', 'price', ','.join(map(lambda x:str(x), self.grab_pos)))
+        self.config.set('pos', 'buyLong', ','.join(map(lambda x:str(x), self.buy_long_btn_pos)))
+        self.config.set('pos', 'buyShort', ','.join(map(lambda x:str(x), self.buy_short_btn_pos)))
+        self.config.set('pos', 'sell', ','.join(map(lambda x:str(x), self.sell_btn_pos)))
+        self.config.set('pos', 'hold', ','.join(map(lambda x:str(x), self.hold_pos)))
+        print("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<")
     
     def click_windows(self, x, y):
         postion = win32api.GetCursorPos()
-        win32api.SetCursorPos((x, y))
+        win32api.SetCursorPos((int(x), int(y)))
         win32api.mouse_event(win32con.MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0)
         win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP, 0, 0, 0, 0) 
 
@@ -99,13 +129,21 @@ class Click:
         self.click_windows(self.buy_short_btn_pos[0], self.buy_short_btn_pos[1])
     
     def click_sell(self):
+        time.sleep(0.1)
+        self.click_hold()
+        self.click_hold()
+        time.sleep(0.1)
         self.click_windows(self.sell_btn_pos[0], self.sell_btn_pos[1])
+
+    def click_hold(self):
+        self.click_windows(self.hold_pos[0], self.hold_pos[1])
         
     def printKeyInfo(self):
         print(self.buy_long_btn_pos)
         print(self.buy_short_btn_pos)
         print(self.sell_btn_pos)
         print(self.grab_pos)
+        print(self.hold_pos)
         
     def run(self):
         self.init_btn_position_with_retry()
@@ -141,10 +179,16 @@ class Gui:
 if __name__ == '__main__':
     # 测试click功能
     click = Click()
-    click.init_btn_position()
-    # click.init_btn_position_with_retry()
+    #click.init_btn_position()
+    click.init_btn_position_with_retry()
     click.printKeyInfo()
-    click.click_buy_long()
+    # click.click_buy_long()
+    time.sleep(1)
+    click.click_hold()
+    click.click_hold()
+    click.click_hold()
+    time.sleep(0.5)
+    click.click_sell()
     
     # 测试gui功能
     # gui = Gui()

@@ -107,25 +107,26 @@ class Crawl_data:
         # get请求的url
         self.req_url = config.get('urls', 'reqUrl')
         # 启动proxy server
-        self.server = Server(self.proxy_server_path)
-        self.server.start()
-        self.proxys = self.server.create_proxy()
-        self.proxys.new_har("k线", options={'captureContent': True})
+        # self.server = Server(self.proxy_server_path)
+        # self.server.start()
+        # self.proxys = self.server.create_proxy()
+        # self.proxys.new_har("k线", options={'captureContent': True})
         
-        self.option = Options()
-        self.option.add_argument("--headless")
-        self.option.add_argument("--proxy-server={0}".format(self.proxys.proxy))
-        self.driver = webdriver.Chrome(options=self.option)
+        # self.option = Options()
+        # self.option.add_argument("--headless")
+        # self.option.add_argument("--proxy-server={0}".format(self.proxys.proxy))
+        # self.driver = webdriver.Chrome(options=self.option)
     
     def get_history_data_from_chrome(self):
         try:
             logger.info("get_history_data_from_chrome start")
-            self.driver.get(self.canle_url)
-            # 切换到分钟k线的界面
-            self.driver.find_element_by_css_selector(".fchart-switches-timeframes a").click()
+            # self.driver.get(self.canle_url)
+            # # 切换到分钟k线的界面
+            # self.driver.find_element_by_css_selector(".fchart-switches-timeframes a").click()
             # 等待5s时间来加载
             time.sleep(5)
-            result = self.proxys.har
+            # result = self.proxys.har
+            result = []
             for entry in result["log"]["entries"]:
                 _url = entry["request"]["url"]
                 if self.req_url in _url:
@@ -142,9 +143,9 @@ class Crawl_data:
         except:
             logger.info("get_history_data_from_chrome failed")
         else:
-            self.server.stop()
-            self.driver.close()
-            self.driver.quit()
+            # self.server.stop()
+            # self.driver.close()
+            # self.driver.quit()
             logger.info("get_history_data_from_chrome success")
     
     def printKeyInfo(self):
@@ -152,7 +153,7 @@ class Crawl_data:
         print(self.close_price_list)
         
     def run(self):
-        print("fake start")
+        logger.info("=====================自动化程序启动====================")
         # self.get_history_data_from_chrome()
     
 if __name__ == '__main__':
