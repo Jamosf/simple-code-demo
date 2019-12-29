@@ -1,5 +1,6 @@
 from PyQt5.QtWidgets import QApplication
 from PyQt5.QtGui import *
+from PyQt5.QtCore import QBuffer
 import win32api, win32gui, win32con
 import tkinter as tk
 import sys
@@ -8,6 +9,7 @@ import configparser
 import time
 from aip import AipOcr
 from looger import *
+import common
 
 app = QApplication(sys.argv)
 screen = QApplication.primaryScreen()
@@ -68,37 +70,37 @@ class Click:
     
     def init_btn_position(self):
         logger.info("init_btn_position start")
-        try:
-            if os.path.exists('desktop.png') is False:
-                win32gui.ShowWindow(self.handle, win32con.SW_RESTORE)
-                win32gui.SetForegroundWindow(self.handle)
-                time.sleep(2)
-                print(self.display_width*self.factor, 0, self.display_width, self.display_height)
-                img = screen.grabWindow(self.handle, self.display_width*self.factor, 0, self.display_width, self.display_height).toImage()
-                img.save('desktop.png')
-            with open('desktop.png', 'rb') as f:
-                img_content = f.read()
-                client = AipOcr(self.appId, self.apiKey, self.secretKey)
-                msg = client.accurate(img_content)
-                print(msg)
-                logger.info(msg)
-                if msg.get('words_result') is None:
-                    print('desktop图片失败出错！请检查desktop图片是否正常.')
-                    f.close()
-                    return
-                self.get_pos_from_msg(msg)
-                f.close()
-                # os.remove('desktop.png')
-        except:
-            logger.info("init_btn_position failed")
-        else:
-            logger.info("init_btn_position success")
+        buffer = QBuffer()
+        # try:
+        win32gui.ShowWindow(self.handle, win32con.SW_RESTORE)
+        win32gui.SetForegroundWindow(self.handle)
+        time.sleep(2)
+        print(self.display_width*self.factor, 0, self.display_width, self.display_height)
+        img = screen.grabWindow(self.handle, self.display_width*self.factor, 0, self.display_width, self.display_height).toImage()
+        # img.save('desktop.png')
+        # with open('desktop.png', 'rb') as f:
+        # img_content = f.read()
+        client = AipOcr(self.appId, self.apiKey, self.secretKey)
+        msg = client.accurate(common.get_img_buffer(buffer, img))
+        print(msg)
+        logger.info(msg)
+        if msg.get('words_result') is None:
+            print('desktop图片失败出错！请检查desktop图片是否正常.')
+            f.close()
+            return
+        self.get_pos_from_msg(msg)
+        buffer.close()
+        # os.remove('desktop.png')
+        # except:
+        #     logger.info("init_btn_position failed")
+        # else:
+        #     logger.info("init_btn_position success")
             
     def init_btn_position_with_retry(self):
         if any(self.buy_long_btn_pos) is True and any(self.buy_short_btn_pos) is True and any(self.sell_btn_pos) is True and any(self.grab_pos) is True and any(self.hold_pos) is True:
             logger.info("read position from config success")
             return
-        while self.is_find_btn is False or self.is_find_grab_area is False or is_find_hold_btn is False:
+        while self.is_find_btn is False or self.is_find_grab_area is False or self.is_find_hold_btn is False:
             self.init_btn_position()
             time.sleep(5)
         # 将获取到的坐标位置保存到配置文件中
