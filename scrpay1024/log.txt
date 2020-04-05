@@ -1,0 +1,16 @@
+2020/04/05 11:14:18 running...
+2020/04/05 11:14:23 html_data/3/2004/4702948.html
+2020/04/05 11:16:17 html_data/3/2004/4702947.html
+2020/04/05 11:22:09 running...
+2020/04/05 11:22:09 html_data/3/2004/4702948.html
+2020/04/05 11:22:39 html_data/3/2004/4702947.html
+2020/04/05 11:25:38 open main url fail, err:Get https://www.skeimg.com/u/20190212/09464225.JPG: unexpected EOF
+2020/04/05 12:05:52 running...
+2020/04/05 12:06:28 html_data/3/2004/4703189.html
+2020/04/05 12:08:56 running...
+2020/04/05 12:08:58 html_data/3/2004/4703189.html
+2020/04/05 12:12:59 html_data/3/2004/4703188.html
+2020/04/05 12:13:33 html_data/3/2004/4703187.html
+2020/04/05 12:14:02 html_data/3/2004/4702948.html
+2020/04/05 12:14:33 html_data/3/2004/4702947.html
+2020/04/05 12:15:49 open main url fail, err:Get https://www.louimg.com/u/20200210/10154195.gif: read tcp 192.168.0.102:3985->104.26.12.47:443: wsarecv: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond.
